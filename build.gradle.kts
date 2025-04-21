@@ -36,15 +36,15 @@ application {
     mainClass.set("io.github.silbaram.Main")
 }
 
-// 컴파일 옵션: UTF‑8
-tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
-}
-
 tasks.shadowJar {
     manifest {
         attributes["Main-Class"] = "io.github.silbaram.Main"
     }
+}
+
+// 컴파일 옵션: UTF‑8
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
 }
 
 tasks.test {

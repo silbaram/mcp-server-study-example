@@ -4,28 +4,26 @@ import io.modelcontextprotocol.server.McpServerFeatures;
 import io.modelcontextprotocol.server.McpSyncServerExchange;
 import io.modelcontextprotocol.spec.McpSchema;
 
+import java.util.List;
 import java.util.Map;
 
 
 public class AddTool {
-//    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     /* 1) 툴 정의(JSON Schema 포함) */
     public McpSchema.Tool definition() {
-        String schemaJson = """
-            {
-              "type": "object",
-              "properties": {
-                "a": { "type": "number", "description": "첫 번째 수" },
-                "b": { "type": "number", "description": "두 번째 수" }
-              },
-              "required": ["a", "b"]
-            }""";
-
         return new McpSchema.Tool(
-                "add",
-                "두 숫자를 더해 합계를 반환합니다.",
-                schemaJson
+            "add",
+            "두 숫자를 더해 합계를 반환합니다.",
+            new McpSchema.JsonSchema(
+                "object",
+                Map.of(
+                    "a", Map.of("type", "number", "description", "첫 번째 수"),
+                    "b", Map.of("type", "number", "description", "두 번째 수")
+                ),
+                List.of("a", "b"),
+                false
+            )
         );
     }
 
@@ -41,7 +39,7 @@ public class AddTool {
                 .build();
     }
     /* 3) 서버에 넘길 SyncToolSpecification */
-    public McpServerFeatures.SyncToolSpecification registration() throws Exception {
+    public McpServerFeatures.SyncToolSpecification registration() {
         return new McpServerFeatures.SyncToolSpecification(
                 definition(),
                 (McpSyncServerExchange exchange, Map<String, Object> argMap) -> doAdd(argMap)
