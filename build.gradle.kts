@@ -28,6 +28,8 @@ dependencies {
     implementation(platform("io.modelcontextprotocol.sdk:mcp-bom:$mcpVersion"))
     implementation("io.modelcontextprotocol.sdk:mcp")
 
+    implementation("ch.qos.logback:logback-classic:1.5.18")
+
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
 }
 

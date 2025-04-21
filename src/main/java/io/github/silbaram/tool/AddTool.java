@@ -38,11 +38,12 @@ public class AddTool {
                 .addTextContent(sum)
                 .build();
     }
+
     /* 3) 서버에 넘길 SyncToolSpecification */
     public McpServerFeatures.SyncToolSpecification registration() {
         return new McpServerFeatures.SyncToolSpecification(
-                definition(),
-                (McpSyncServerExchange exchange, Map<String, Object> argMap) -> doAdd(argMap)
+            definition(),
+            (McpSyncServerExchange exchange, Map<String, Object> argMap) -> doAdd(argMap)
         );
     }
 }
